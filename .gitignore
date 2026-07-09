@@ -1,0 +1,53 @@
+# ---- Secrets / local config ----
+bookmarket/src/main/resources/application.properties
+frontend/.env
+frontend/.env.local
+*.env
+
+# ---- OS ----
+.DS_Store
+
+# ---- Editors / IDEs ----
+.idea/
+.vscode/
+!.vscode/extensions.json
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated
+.springBeans
+.sts4-cache
+
+# ---- Backend (Gradle / Spring Boot) ----
+bookmarket/.gradle/
+bookmarket/build/
+bookmarket/bin/
+!bookmarket/**/src/main/**/build/
+!bookmarket/**/src/test/**/build/
+!bookmarket/**/src/main/**/bin/
+!bookmarket/**/src/test/**/bin/
+!bookmarket/gradle/wrapper/gradle-wrapper.jar
+bookmarket/HELP.md
+bookmarket/out/
+bookmarket/nbproject/private/
+bookmarket/nbbuild/
+bookmarket/dist/
+bookmarket/nbdist/
+bookmarket/.nb-gradle/
+
+# ---- Frontend (Node / Vite) ----
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*

@@ -1,0 +1,340 @@
+:root {
+  /* Color palette (design.md) */
+  --color-bg: #09090b;
+  --color-surface: rgba(255, 255, 255, 0.04);
+  --color-glass: rgba(255, 255, 255, 0.02);
+  --color-primary: #ffffff;
+  --color-secondary: rgba(255, 255, 255, 0.7);
+  --color-tertiary: rgba(255, 255, 255, 0.45);
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-accent: #d6b370;
+  --color-accent-strong: #e8c98d;
+  --color-danger: #ef4444;
+  --color-success: #22c55e;
+
+  /* Typography */
+  --font-serif: 'Instrument Serif', 'Georgia', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Layout */
+  --container-max: 1440px;
+  --content-width: 1200px;
+  --space-section: 140px;
+  --space-section-sm: 80px;
+  --space-card: 32px;
+
+  /* Radius */
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --radius-image: 28px;
+  --radius-sm: 14px;
+
+  /* Shadow */
+  --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.18);
+  --shadow-lift: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-1: 150ms;
+  --dur-2: 250ms;
+  --dur-3: 400ms;
+  --dur-4: 700ms;
+
+  color-scheme: dark;
+  color: var(--color-primary);
+  background: var(--color-bg);
+  font: 400 16px/1.6 var(--font-sans);
+  letter-spacing: 0.01em;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  min-height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--color-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  line-height: 1.1;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+  color: var(--color-secondary);
+  font-weight: 300;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #09090b;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+}
+
+/* ---- Shared glass material (design.md "Glass Material") ---- */
+.glass {
+  background: var(--color-glass);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: var(--shadow-soft);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.section {
+  padding: var(--space-section) 0;
+}
+
+.page {
+  padding-top: 128px;
+  flex: 1;
+}
+
+/* ---- Shared badge + spec-table primitives (used by BookCard/BookDetail) ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badge--accent {
+  background: rgba(214, 179, 112, 0.16);
+  color: var(--color-accent-strong);
+}
+
+.badge--danger {
+  background: rgba(239, 68, 68, 0.14);
+  color: var(--color-danger);
+}
+
+.badge--muted {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-tertiary);
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.spec-table tr {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.spec-table tr:last-child {
+  border-bottom: none;
+}
+
+.spec-table th,
+.spec-table td {
+  text-align: left;
+  padding: 16px 20px;
+  font-weight: 400;
+}
+
+.spec-table th {
+  width: 160px;
+  color: var(--color-tertiary);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+}
+
+.spec-table td {
+  color: var(--color-secondary);
+}
+
+.spec-table tr:nth-child(odd) {
+  background: var(--color-surface);
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --space-section: 90px;
+  }
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --space-section: 64px;
+  }
+  .container {
+    padding: 0 18px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---- Toasts ---- */
+.toast-stack {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  animation: toast-in var(--dur-3) var(--ease);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast--success svg {
+  color: var(--color-success);
+}
+.toast--error svg {
+  color: var(--color-danger);
+}
+.toast--info svg {
+  color: var(--color-accent);
+}
+
+.toast span {
+  flex: 1;
+  color: var(--color-primary);
+}
+
+.toast__close {
+  background: transparent;
+  border: none;
+  color: var(--color-tertiary);
+  cursor: pointer;
+  display: flex;
+}
+
+@media (max-width: 640px) {
+  .toast-stack {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}

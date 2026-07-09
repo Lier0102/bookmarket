@@ -1,0 +1,131 @@
+.board-list {
+  width: 100%;
+}
+
+.board-list__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+  animation: board-list-fade var(--dur-4) var(--ease) both;
+}
+
+@keyframes board-list-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.board-list__eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
+.board-list__lede {
+  font-size: 1.0625rem;
+  color: var(--color-secondary);
+  margin-top: 14px;
+  max-width: 56ch;
+}
+
+.board-list__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board-row {
+  overflow: hidden;
+}
+
+.board-row__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 26px 32px;
+}
+
+.board-row__main {
+  min-width: 0;
+  flex: 1;
+}
+
+.board-row__title {
+  font-size: 1.125rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-row__meta {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-shrink: 0;
+  color: var(--color-tertiary);
+  font-size: 0.875rem;
+}
+
+.board-row__writer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-secondary);
+}
+
+.board-row__date {
+  min-width: 8ch;
+  text-align: right;
+}
+
+.board-row__arrow {
+  color: var(--color-tertiary);
+  transition: transform var(--dur-2) var(--ease), color var(--dur-2) var(--ease);
+}
+
+.board-row:hover .board-row__arrow {
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 640px) {
+  .board-list__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .board-row__link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 22px 24px;
+  }
+
+  .board-row__meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .board-row__arrow {
+    display: none;
+  }
+}

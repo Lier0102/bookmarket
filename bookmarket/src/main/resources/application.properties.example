@@ -1,0 +1,16 @@
+spring.application.name=bookmarket
+spring.datasource.url=jdbc:mysql://localhost:3308/bookmarket
+spring.datasource.username=your_db_username
+spring.datasource.password=your_db_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.open-in-view=false
+logging.level.com.asdf=DEBUG
+logging.level.org.springframework.security=DEBUG
+
+# Generate a long random value, e.g.: openssl rand -hex 32
+app.jwt.secret=replace-with-a-long-random-secret-at-least-256-bits
+app.jwt.access-token-expiration=3600000
+app.jwt.refresh-token-expiration=604800000
+app.upload.path=/absolute/path/to/upload/directory

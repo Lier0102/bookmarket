@@ -1,0 +1,24 @@
+import { api } from './client'
+
+// -> MemberResponse
+export const getMe = () => api.get('/api/member/me')
+
+// payload: { name, phone, email, address, newPassword? }
+// NOTE: fields omitted/null in the payload will overwrite existing values with null
+// (except newPassword, which is only applied when non-blank) — always send full current values.
+export const updateMe = (payload) => api.put('/api/member/me', payload)
+
+export const deleteMe = () => api.del('/api/member/me')
+
+// admin only -> MemberResponse[] (not paginated)
+export const listMembers = () => api.get('/api/member')
+
+// admin only — book create; payload uses singular `unitInStock` (response uses plural `unitsInStock`)
+// payload: { bookId, name, price, author, description, publisher, category, unitInStock, releaseDate, condition }
+export const createBook = (payload) => api.post('/api/member', payload)
+
+// admin only — book update; same fields as create minus bookId
+export const updateBook = (bookId, payload) => api.put(`/api/member/${bookId}`, payload)
+
+// admin only
+export const deleteBook = (bookId) => api.del(`/api/member/${bookId}`)
