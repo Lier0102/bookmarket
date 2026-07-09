@@ -31,3 +31,9 @@ export const uploadBookImage = (bookId, file) => {
   form.append('imageFile', file)
   return api.post(`/api/book/${bookId}/image`, form, { isForm: true })
 }
+
+// admin only — book update; same fields as create minus bookId
+export const updateBook = (bookId, payload) => api.put(`/api/book/${bookId}`, payload)
+
+// admin only
+export const deleteBook = (bookId) => api.del(`/api/book/${bookId}`)

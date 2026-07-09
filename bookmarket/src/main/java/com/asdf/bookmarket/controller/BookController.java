@@ -1,12 +1,15 @@
 package com.asdf.bookmarket.controller;
 
 import com.asdf.bookmarket.dto.request.BookImageUploadRequest;
+import com.asdf.bookmarket.dto.request.BookUpdateRequest;
 import com.asdf.bookmarket.dto.response.ApiResponse;
 import com.asdf.bookmarket.dto.response.BookResponse;
 import com.asdf.bookmarket.dto.response.PageResponse;
 import com.asdf.bookmarket.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.query.Param;
@@ -93,5 +96,33 @@ public class BookController {
                         "inline; filename=\"" + resource.getFilename() +"\"")
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(resource);
+    }
+
+    @Operation(summary = "edit book info (admin only)",
+            description = "with json, images are supposed to be uploaded via external API",
+            security = @SecurityRequirement(name = "bearerAuth"))
+    @PutMapping("/{bookId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<BookResponse>> updateBook(
+            @Parameter(description = "book ID", example = "ISBN2345")
+            @PathVariable String bookId,
+            @Valid @RequestBody BookUpdateRequest request
+    ) {
+        return ResponseEntity.ok(ApiResponse.success("edited book info's succ",
+                bookService.updateBook(bookId, request, null)));
+    }
+
+    @Operation(summary = "book removal (admin only)",
+            description = "image will be deleted accordingly",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
+    @DeleteMapping("/{bookId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<Void>> deleteBook(
+            @Parameter(description = "book ID", example = "ISBN1234")
+            @PathVariable String bookId) {
+
+        bookService.deleteBook(bookId);
+        return ResponseEntity.ok(ApiResponse.noContent());
     }
 }

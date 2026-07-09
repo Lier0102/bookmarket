@@ -82,32 +82,4 @@ public class MemberController {
                 bookService.createBook(request, null)
         ));
     }
-
-    @Operation(summary = "edit book info (admin only)",
-            description = "with json, images are supposed to be uploaded via external API",
-            security = @SecurityRequirement(name = "bearerAuth"))
-    @PutMapping("/{bookId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<BookResponse>> updateBook(
-        @Parameter(description = "book ID", example = "ISBN2345")
-        @PathVariable String bookId,
-        @Valid @RequestBody BookUpdateRequest request
-    ) {
-        return ResponseEntity.ok(ApiResponse.success("edited book info's succ",
-                bookService.updateBook(bookId, request, null)));
-    }
-
-    @Operation(summary = "book removal (admin only)",
-            description = "image will be deleted accordingly",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    @DeleteMapping("/{bookId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<Void>> deleteBook(
-        @Parameter(description = "book ID", example = "ISBN1234")
-        @PathVariable String bookId) {
-
-        bookService.deleteBook(bookId);
-        return ResponseEntity.ok(ApiResponse.noContent());
-    }
 }
