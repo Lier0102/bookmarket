@@ -1,21 +1,14 @@
 package com.asdf.bookmarket.controller;
 
-import com.asdf.bookmarket.dto.request.BookCreateRequest;
-import com.asdf.bookmarket.dto.request.BookUpdateRequest;
 import com.asdf.bookmarket.dto.request.MemberUpdateRequest;
 import com.asdf.bookmarket.dto.response.ApiResponse;
-import com.asdf.bookmarket.dto.response.BookResponse;
 import com.asdf.bookmarket.dto.response.MemberResponse;
 import com.asdf.bookmarket.security.CustomerUserDetails;
-import com.asdf.bookmarket.service.BookService;
 import com.asdf.bookmarket.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,8 +22,6 @@ import java.util.List;
 @SecurityRequirement(name = "bearerAuth")
 public class MemberController {
     private final MemberService memberService;
-    private final BookService bookService;
-
 
     @Operation(summary = "view my info", description = "lookup my info's")
     @GetMapping("/me")

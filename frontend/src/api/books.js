@@ -32,6 +32,10 @@ export const uploadBookImage = (bookId, file) => {
   return api.post(`/api/book/${bookId}/image`, form, { isForm: true })
 }
 
+// admin only — book create; payload uses singular `unitInStock` (response uses plural `unitsInStock`)
+// payload: { bookId, name, price, author, description, publisher, category, unitInStock, releaseDate, condition }
+export const createBook = (payload) => api.post('/api/book', payload)
+
 // admin only — book update; same fields as create minus bookId
 export const updateBook = (bookId, payload) => api.put(`/api/book/${bookId}`, payload)
 

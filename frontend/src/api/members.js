@@ -12,7 +12,3 @@ export const deleteMe = () => api.del('/api/member/me')
 
 // admin only -> MemberResponse[] (not paginated)
 export const listMembers = () => api.get('/api/member')
-
-// admin only — book create; payload uses singular `unitInStock` (response uses plural `unitsInStock`)
-// payload: { bookId, name, price, author, description, publisher, category, unitInStock, releaseDate, condition }
-export const createBook = (payload) => api.post('/api/member', payload)
