@@ -69,17 +69,4 @@ public class MemberController {
 
         return ResponseEntity.ok(ApiResponse.success(responses));
     }
-
-    @Operation(summary = "book registration (admin only)",
-            description = "with json, images are supposed to be uploaded via external API",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ApiResponse<BookResponse>> createBook(
-            @Valid @RequestBody BookCreateRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created(
-                bookService.createBook(request, null)
-        ));
-    }
 }

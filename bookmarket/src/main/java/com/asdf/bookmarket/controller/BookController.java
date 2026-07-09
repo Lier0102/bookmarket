@@ -1,5 +1,6 @@
 package com.asdf.bookmarket.controller;
 
+import com.asdf.bookmarket.dto.request.BookCreateRequest;
 import com.asdf.bookmarket.dto.request.BookImageUploadRequest;
 import com.asdf.bookmarket.dto.request.BookUpdateRequest;
 import com.asdf.bookmarket.dto.response.ApiResponse;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -96,6 +98,19 @@ public class BookController {
                         "inline; filename=\"" + resource.getFilename() +"\"")
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(resource);
+    }
+
+    @Operation(summary = "book registration (admin only)",
+            description = "with json, images are supposed to be uploaded via external API",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ApiResponse<BookResponse>> createBook(
+            @Valid @RequestBody BookCreateRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.created(
+                bookService.createBook(request, null)
+        ));
     }
 
     @Operation(summary = "edit book info (admin only)",
