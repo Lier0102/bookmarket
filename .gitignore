@@ -7,6 +7,12 @@ frontend/.env.local
 # ---- OS ----
 .DS_Store
 
+# ---- Personal / assignment artifacts (not part of the app) ----
+2114_ijw.zip
+bookmarket/2114_ijw.xlsx
+bookmarket/API_테스트_체크리스트.xlsx
+bookmarket/ERD.html
+
 # ---- Editors / IDEs ----
 .idea/
 .vscode/
